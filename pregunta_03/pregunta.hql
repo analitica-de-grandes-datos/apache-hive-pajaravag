@@ -30,5 +30,5 @@ FIELDS TERMINATED BY ','
 
 SELECT value FROM data_file
 ORDER BY value ASC
-LIMIT 5;
+LIMIT 4;
 
