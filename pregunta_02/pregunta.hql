@@ -28,5 +28,5 @@ ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 
 SELECT * FROM data_file
-ORDER BY letter, value;
+ORDER BY letter, value, dates;
 
