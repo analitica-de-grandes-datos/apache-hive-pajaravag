@@ -45,11 +45,12 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
     >>> Escriba su respuesta a partir de este punto <<<
 */
 
-INSERT OVERWRITE LOCAL DIRECTORY './output'
-ROW FORMAT DELIMITED
-FIELDS TERMINATED BY ','
+--INSERT OVERWRITE LOCAL DIRECTORY './output'
+--ROW FORMAT DELIMITED
+--FIELDS TERMINATED BY ','
 
-SELECT Year, COUNT(list) FROM (
-    SELECT YEAR(DATE), list FROM tbl0 LATERAL VIEW explode(c5) AS list
-)
-GROUP BY Year;
+SELECT Annum, COUNT(list) FROM (
+    SELECT year(c4) AS Annum, list FROM tbl0 LATERAL VIEW explode(c5) tbl0 AS list
+) subtable
+GROUP BY Annum;
+
