@@ -52,5 +52,5 @@ FIELDS TERMINATED BY ','
 SELECT Annum, list, COUNT(*) FROM (
     SELECT year(c4) AS Annum, list FROM tbl0 LATERAL VIEW explode(c5) tbl0 AS list
 ) subtable
-GROUP BY Annum;
+GROUP BY Annum, list;
 
