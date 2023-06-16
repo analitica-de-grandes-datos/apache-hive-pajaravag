@@ -13,5 +13,22 @@ Escriba el resultado a la carpeta `output` de directorio de trabajo.
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+DROP TABLE IF EXISTS data_file;
 
+CREATE TABLE data_file(
+        letter STRING,
+        dates STRING,
+        value INT
+)
+ROW FORMAT DELIMITED 
+FIELDS TERMINATED BY '\t';
+LOAD DATA LOCAL INPATH 'data.tsv' INTO TABLE data_file;
+
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+
+SELECT value FROM data_file
+ORDER BY value ASC
+LIMIT 4;
 
