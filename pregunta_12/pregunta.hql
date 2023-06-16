@@ -44,6 +44,5 @@ FROM (
     LATERAL VIEW explode(c3) t0 AS map_key, map_value
 ) t0
 LATERAL VIEW explode(c2) t0
---GROUP BY c2, map_key
 ;
 
