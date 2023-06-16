@@ -50,15 +50,15 @@ ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 
 SELECT t0.c1,
-        t1.c4,
+        t0.c2,
         map_value
 FROM tbl0 t0
 JOIN (
-    SELECT t1.c1, map_key, map_value
+    SELECT c1, map_key, map_value
     FROM tbl1 t1
     LATERAL VIEW explode(c4) tbl1 AS map_key, map_value
-)
-WHERE t0.c1 == t1.c1 AND t1.c4 == map_value;
+) t1
+WHERE t0.c1 = t1.c1 AND t0.c2 = map_value;
 
 -- SELECT map_key, map_value
 -- FROM tbl1 t1
