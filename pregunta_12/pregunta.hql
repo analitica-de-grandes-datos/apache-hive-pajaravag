@@ -37,13 +37,14 @@ INSERT OVERWRITE LOCAL DIRECTORY './output'
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 
-SELECT letter, map_key, SIZE(c3)
+SELECT letter, map_key, COUNT(*)
 FROM (
     SELECT c2, c3, map_key
     FROM t0
     LATERAL VIEW explode(c3) t0 AS map_key, map_value
 ) t0
 LATERAL VIEW explode(c2) t0 AS letter
+GROUP letter, map_key
 ORDER BY letter, map_key
 ;
 
