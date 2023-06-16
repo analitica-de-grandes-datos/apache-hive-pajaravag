@@ -45,4 +45,17 @@ LOAD DATA LOCAL INPATH 'data1.csv' INTO TABLE tbl1;
 /*
     >>> Escriba su respuesta a partir de este punto <<<
 */
+INSERT OVERWRITE LOCAL DIRECTORY './output'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
 
+SELECT t0.c1,
+        t1.c4,
+        map_value
+FROM tbl0 t0
+JOIN (
+    SELECT 
+    FROM tbl1 t1
+    LATERAL VIEW explode(c4) tbl1 AS map_key, map_value
+)
+WHERE t1.c4 == map_value;
