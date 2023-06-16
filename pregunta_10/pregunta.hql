@@ -35,4 +35,9 @@ FROM (
     SELECT map_key
     FROM t0
     LATERAL VIEW explode(c3) t0 AS map_key, map_value
-) t0;
+) t0
+GROUP BY map_key;
+
+-- SELECT map_key
+-- FROM t0
+-- LATERAL VIEW explode(c3) t0 AS map_key, map_value
